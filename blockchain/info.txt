@@ -16,3 +16,36 @@ git remote add origin https://github.com/mamedee/blockchain-java.git
 git branch -M main
 git push -u origin main
 
+----------------------------------
+
+blockchain.db
+
+CREATE TABLE "blockchain" (
+	"id"	INTEGER NOT NULL UNIQUE,
+	"previous_hash"	BLOB UNIQUE,
+	"current_hash"	BLOB UNIQUE,
+	"ledger_id"	INTEGER NOT NULL UNIQUE,
+	"created_by"	BLOB,
+	"mining_points"	INTEGER,
+	"luck"	NUMERIC,
+	"created_on"	TEXT,
+	PRIMARY KEY("id" AUTOINCREMENT)
+)
+
+CREATE TABLE "transactions" (
+	"id"	INTEGER NOT NULL UNIQUE,
+	"from"	BLOB,
+	"to"	BLOB,
+	"ledger_id"	INTEGER,
+	"signature"	BLOB UNIQUE,
+	"created_on"	TEXT,
+	PRIMARY KEY("id" AUTOINCREMENT)
+)
+
+wallet.db
+
+CREATE TABLE "wallet" (
+	"private_key"	BLOB NOT NULL UNIQUE,
+	"public_key"	BLOB NOT NULL UNIQUE,
+	PRIMARY KEY("private_key","public_key")
+)
